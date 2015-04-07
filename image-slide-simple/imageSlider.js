@@ -1,11 +1,12 @@
 (function(window, $) {
 	function ImageSlider(slider, options) {
 		defaults= {
-			slideList : 'ul',
-			slideBtn  : '.slide-btn',
-			slideNum  : 4,
-			slideTime : 1000,			
-			autoSlide : true
+			slideList 	: 'ul',
+			slideBtn  	: '.slide-btn',
+			slideNum  	: 4,
+			slideTime 	: 1000,
+			slideInterval: 3000,
+			autoSlide 	: true
 		}		
 		this.options = $.extend(defaults, options);
 		this.slider = slider;
@@ -42,11 +43,33 @@
 				} else {
 					_slider.slideToRight();
 				}
-			})
+			});
+
+			this.inter = null;
+			
+			if(this.options.autoSlide) {
+				$(document).ready(function() {
+					_slider.setAutoSlide();
+				});
+				this.slider.on('mouseenter', function() {
+					clearTimeout(_slider.inter);
+				}).on('mouseout', function() {
+					_slider.setAutoSlide();
+				});
+			}				
 		},
+
+		setAutoSlide: function() {
+			clearTimeout(this.inter);
+			var _slider = this;
+			this.inter = setTimeout(function() {
+				_slider.slideToLeft();
+				_slider.setAutoSlide();
+			}, this.options.slideInterval);
+		},
+
 		slideToLeft: function() {
 			var slider = this;
-			///this.slideElem 不可以 因为ul的li已更新
 			var clone = this.slideList.children().slice(0, this.options.slideNum);
 			this.slideList.append(clone.clone()); ///
 			this.slideList.animate({left: '-=' + this.slideStep}, this.options.slideTime, function() {
@@ -54,6 +77,7 @@
 				$(this).css({left: '+=' + slider.slideStep});
 			})
 		},
+
 		slideToRight: function() {
 			var clone = this.slideList.children().slice(-this.options.slideNum);
 			this.slideList.prepend(clone.clone());
@@ -65,7 +89,7 @@
 		}
 	}
 
-	$.fn.ImageSlider = function(options) {
+	$.fn.imageSlider = function(options) {
 		
 		var instance = new ImageSlider(this, options);
 
