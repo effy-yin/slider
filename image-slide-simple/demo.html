@@ -14,6 +14,8 @@
 	height: 94px;
 	position: relative;
 	overflow: hidden;
+
+	margin: 10px 0;
 }
 .slide-wrapper ul {
 	position: absolute;
@@ -39,16 +41,23 @@
 	top: 10px;
 	opacity: .6;
 }
-.slide-wrapper .next {
+.slide-wrapper .slide-btn.next {
 	background-position: -46px 0;
-	right: 0px;
-	left: 600px
+	right: 0;
+	left: 600px; /**/
+}
+#slider3.slide-wrapper {
+	width: 162px;
+}
+#slider3.slide-wrapper .slide-btn.next{
+	right: 0;
+	left: 114px;/**/
 }
 </style>
 </head>
 <body>
-
-	<div class="slide-wrapper" id="slider">
+	<h1>Demo 1: autoSlide: false, slideNum: 4</h1>
+	<div class="slide-wrapper" id="slider1">
 		<ul>
 			<li><div><img src="../images/1.jpg"></div></li>
 			<li><div><img src="../images/2.jpg"></div></li>
@@ -60,14 +69,45 @@
 		<a href="#" class="slide-btn prev"></a>
 		<a href="#" class="slide-btn next"></a>
 	</div>
-	
+
+	<h1>Demo 2: autoSlide: true, slideNum: 2</h1>
+	<div class="slide-wrapper" id="slider2">
+		<ul>
+			<li><div><img src="../images/1.jpg"></div></li>
+			<li><div><img src="../images/2.jpg"></div></li>
+			<li><div><img src="../images/3.jpg"></div></li>
+			<li><div><img src="../images/4.jpg"></div></li>
+			<li><div><img src="../images/5.jpg"></div></li>
+			<li><div><img src="../images/6.jpg"></div></li>			
+		</ul>
+		<a href="#" class="slide-btn prev"></a>
+		<a href="#" class="slide-btn next"></a>
+	</div>
+
+	<h1>Demo 3: autoSlide: true, slideNum: 1</h1>
+	<div class="slide-wrapper" id="slider3">
+		<ul>
+			<li><div><img src="../images/1.jpg"></div></li>
+			<li><div><img src="../images/2.jpg"></div></li>
+			<li><div><img src="../images/3.jpg"></div></li>
+			<li><div><img src="../images/4.jpg"></div></li>
+			<li><div><img src="../images/5.jpg"></div></li>
+			<li><div><img src="../images/6.jpg"></div></li>			
+		</ul>
+		<a href="#" class="slide-btn prev"></a>
+		<a href="#" class="slide-btn next"></a>
+	</div>
 </body>	
 <script type="text/javascript" src="imageSlider.js"></script>
 
 <script type="text/javascript">
 
-$('#slider').imageSlider();
+$('#slider1').imageSlider({autoSlide: false});
 //var slider = new ImageSlider('#slider');
 //slider.slideToLeft();
+
+$('#slider2').imageSlider({slideNum: 2, slideTime: 600});
+
+$('#slider3').imageSlider({slideNum: 1, slideTime: 600});
 </script>
 </html>

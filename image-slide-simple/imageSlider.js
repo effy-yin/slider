@@ -21,11 +21,11 @@
 		slideElemW: 0,
 		slideStep: 0,
 		enble: true*/
+		enable: true,
 		init: function() {
 			this.slideList = this.slider.find(this.options.slideList);
 			this.slideElem = this.slideList.children();
 			this.slideBtn = this.slider.find(this.options.slideBtn);
-			this.enable = this.options.autoSlide;
 
 			this.slideElemW = this.slideElem.width();
 			this.slideStep = this.slideElemW * this.options.slideNum;
@@ -36,8 +36,13 @@
 			 */
 			this.slideList.css({width: this.slideElemW * (this.options.slideNum + this.slideElem.length) , left: 0});
 
-			var _slider = this;
+			this.enable = true; /**/
+			this.inter = null;	/**/
+
+			var _slider = this; /*注意不同地方this的作用域*/
+
 			this.slideBtn.on('click', function() {
+				if(!_slider.enable) return;	/*防止多次点击滚动按钮造成的bug*/
 				if($(this).hasClass('next')) {
 					_slider.slideToLeft();
 				} else {
@@ -45,45 +50,59 @@
 				}
 			});
 
-			this.inter = null;
-			
-			if(this.options.autoSlide) {
-				$(document).ready(function() {
-					_slider.setAutoSlide();
-				});
+
+			if(this.options.autoSlide) {				
+				/*_slider.setAutoSlide();
+
 				this.slider.on('mouseenter', function() {
 					clearTimeout(_slider.inter);
 				}).on('mouseout', function() {
 					_slider.setAutoSlide();
-				});
-			}				
+				});*/
+			}		
+			/*事件执行顺序问题,不能放到if里面,把if判断放到setAutoSlide函数中 */
+			this.setAutoSlide();
+
+			this.slider.on('mouseenter', function() {
+				clearTimeout(_slider.inter);
+			}).on('mouseout', function() {
+				_slider.setAutoSlide();
+			});		
 		},
 
 		setAutoSlide: function() {
 			clearTimeout(this.inter);
-			var _slider = this;
-			this.inter = setTimeout(function() {
-				_slider.slideToLeft();
-				_slider.setAutoSlide();
-			}, this.options.slideInterval);
+			if(this.options.autoSlide) {
+				var _slider = this;
+				this.inter = setTimeout(function() {
+					_slider.slideToLeft();
+					_slider.setAutoSlide();
+				}, this.options.slideInterval);
+			}
+			
 		},
 
 		slideToLeft: function() {
-			var slider = this;
+			this.enable = false; 			/*图片滚动期间点击滚动按钮无效*/
+			var _slider = this;
 			var clone = this.slideList.children().slice(0, this.options.slideNum);
 			this.slideList.append(clone.clone()); ///
 			this.slideList.animate({left: '-=' + this.slideStep}, this.options.slideTime, function() {
 				clone.remove();
-				$(this).css({left: '+=' + slider.slideStep});
+				$(this).css({left: '+=' + _slider.slideStep});
+				_slider.enable = true; 		/*图片滚动动画结束*/
 			})
 		},
 
 		slideToRight: function() {
+			this.enable = false;
+			var _slider = this
 			var clone = this.slideList.children().slice(-this.options.slideNum);
 			this.slideList.prepend(clone.clone());
 			this.slideList.css({left: '-=' + this.slideStep});
 			this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideTime, function() {
 				clone.remove();
+				_slider.enable = true;
 			})
 			
 		}
