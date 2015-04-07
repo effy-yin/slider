@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>图片轮播</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 <style type="text/css">
 * {
 	margin: 0;
@@ -32,6 +32,7 @@
 	margin-left: 2px;
 }
 .slide-wrapper .slide-btn {
+	cursor: pointer;
 	background: url("../images/btn.png");
 	display: block;
 	width: 46px;
@@ -66,8 +67,8 @@
 			<li><div><img src="../images/5.jpg"></div></li>
 			<li><div><img src="../images/6.jpg"></div></li>			
 		</ul>
-		<a href="#" class="slide-btn prev"></a>
-		<a href="#" class="slide-btn next"></a>
+		<span class="slide-btn prev"></span>
+		<span class="slide-btn next"></span>
 	</div>
 
 	<h1>Demo 2: autoSlide: true, slideNum: 2</h1>
@@ -80,8 +81,8 @@
 			<li><div><img src="../images/5.jpg"></div></li>
 			<li><div><img src="../images/6.jpg"></div></li>			
 		</ul>
-		<a href="#" class="slide-btn prev"></a>
-		<a href="#" class="slide-btn next"></a>
+		<span class="slide-btn prev"></span>
+		<span class="slide-btn next"></span>
 	</div>
 
 	<h1>Demo 3: autoSlide: true, slideNum: 1</h1>
@@ -94,8 +95,8 @@
 			<li><div><img src="../images/5.jpg"></div></li>
 			<li><div><img src="../images/6.jpg"></div></li>			
 		</ul>
-		<a href="#" class="slide-btn prev"></a>
-		<a href="#" class="slide-btn next"></a>
+		<span class="slide-btn prev"></span>
+		<span class="slide-btn next"></span>
 	</div>
 </body>	
 <script type="text/javascript" src="imageSlider.js"></script>
