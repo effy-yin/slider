@@ -1,0 +1,51 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.slide-wrapper {
+	width: 648px;			/*根据需要自定义*/
+	height: 94px;
+	position: relative;
+	overflow: hidden;
+	margin: 10px 0;
+}
+.slide-wrapper ul {
+	position: absolute;
+	font-size: 0; 			/*不设置的话列表项之间会有间距！*/
+}
+.slide-wrapper ul li {
+	list-style: none;
+	display: inline-block;
+	width: 162px; 			/*根据需要自定义*/
+	*display: inline;		/*for IE7/8*/
+	*zoom: 1;
+}
+.slide-wrapper ul li img {
+	width: 158px; 			/*根据需要自定义*/
+	height: 94px;
+	margin-left: 2px;
+}
+.slide-wrapper .slide-btn {
+	cursor: pointer;
+	background: url("../images/btn.png");
+	display: block;
+	width: 46px;
+	height: 80px;
+	position: absolute;
+	left: 2px; 
+	top: 10px;
+	opacity: .4;
+	filter: alpha(opacity=40);/*for IE7/8*/
+}
+.slide-wrapper .slide-btn.next {
+	background-position: -46px 0;
+	right: 0;
+	left: 600px; 			/*bug！right值设置不了啊啊啊*/
+}
+#slider3.slide-wrapper {
+	width: 162px;
+}
+#slider3.slide-wrapper .slide-btn.next{
+	right: 0;
+	left: 114px;			/*bug！right值设置不了啊啊啊*/
+}

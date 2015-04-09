@@ -1,5 +1,5 @@
 (function(window, $) {
-	function ImageSlider(slider, options) {
+	function ImageGallery(slider, options) {
 		defaults= {
 			slideList 	: 'ul',
 			slideBtn  	: '.slide-btn',
@@ -13,7 +13,7 @@
 		this.init();
 	}
 
-	ImageSlider.prototype = {
+	ImageGallery.prototype = {
 		/*slider: null,
 		slideList: null,
 		slideBtn: null,
@@ -110,7 +110,7 @@
 
 	$.fn.imageSlider = function(options) {
 		
-		var instance = new ImageSlider(this, options);
+		var instance = new ImageGallery(this, options);
 
 		//return instance;
 		return $(this);
