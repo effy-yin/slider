@@ -11,7 +11,7 @@
 			loopSlide   : true
 		}		
 		this.options = $.extend(defaults, options);
-		this.slider = $(slider)
+		this.slider = $(slider);
 		this.init();
 	}
 
