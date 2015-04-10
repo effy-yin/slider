@@ -1,6 +1,6 @@
 (function(window, $) {
 
-	function ImageSlider(slider, options) {
+	ImageSlider = function(slider, options) {
 		defaults= {
 			slideList 	: 'ul',
 			slideBtn  	: '.slide-btn',
@@ -11,7 +11,7 @@
 			loopSlide   : true
 		}		
 		this.options = $.extend(defaults, options);
-		this.slider = slider;
+		this.slider = $(slider)
 		this.init();
 	}
 
