@@ -14,14 +14,9 @@
 	}
 
 	ImageGallery.prototype = {
-		/*slider: null,
-		slideList: null,
-		slideBtn: null,
-		inter: null,
-		slideElemW: 0,
-		slideStep: 0,
-		enble: true*/
+		
 		enable: true,
+
 		init: function() {
 			this.slideList = this.slider.find(this.options.slideList);
 			this.slideElem = this.slideList.children();
@@ -108,7 +103,9 @@
 		}
 	}
 
-	$.fn.imageSlider = function(options) {
+	window.ImageGallery = ImageGallery;
+
+	$.fn.imageGallery = function(options) {
 		
 		var instance = new ImageGallery(this, options);
 

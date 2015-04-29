@@ -1,14 +1,16 @@
 (function(window, $) {
 
-	ImageSlider = function(slider, options) {
-		defaults= {
-			slideList 	: 'ul',
-			slideBtn  	: '.slide-btn',
-			slideNum  	: 4,
-			slideDuration 	: 1000,
-			slideInterval: 3000,
-			autoSlide 	: true,
-			loopSlide   : true
+	'use strict';
+
+	function ImageSlider (slider, options) {
+		var defaults= {
+			slideList 		: 'ul',
+			slideBtn  		: '.slide-btn',
+			slideNum  		: 4,
+			slideDuration	: 1000,
+			slideInterval	: 3000,
+			autoSlide 		: true,
+			loopSlide   	: true
 		}		
 		this.options = $.extend(defaults, options);
 		this.slider = $(slider);
@@ -16,14 +18,7 @@
 	}
 
 	ImageSlider.prototype = {
-		/*slider: null,
-		slideList: null,
-		slideBtn: null,
-		inter: null,
-		slideElemW: 0,
-		slideStep: 0,
-		enble: true*/
-		enable: true,
+
 		init: function() {
 			this.slideList = this.slider.find(this.options.slideList);
 			this.slideElem = this.slideList.children();
@@ -32,18 +27,18 @@
 			this.slideElemW = this.slideElem.width();
 			this.slideStep = this.slideElemW * this.options.slideNum;
 
-			/*执行图片滚动动画时会闪烁bug修复
+			/*执行图片滚动动画时闪烁bug修复
 			 *需要初始化图片列表宽度，
 			 *列表宽度为原列表宽度加上滑动窗口的宽度
 			 */		
 			if(this.options.loopSlide) {
-				this.slideList.css({width: this.slideElemW * (this.options.slideNum + this.slideElem.length) , left: 0});
+				this.slideList.css({width: this.slideElemW * (this.slideElem.length + this.options.slideNum) , left: 0});
 			} else {
 				this.slideList.css({width: this.slideElemW * this.slideElem.length , left: 0});
 			}
 
 			this.enable = true; /**/
-			this.inter = null;	/**/
+			this.timer = null;	/**/
 
 			var _slider = this; /*注意不同地方this的作用域*/
 
@@ -57,35 +52,47 @@
 			});
 
 
-			if(this.options.autoSlide) {				
-				/*_slider.setAutoSlide();
+			// if(this.options.autoSlide) {				
+			// 	_slider.setAutoSlide();
 
-				this.slider.on('mouseenter', function() {
-					clearTimeout(_slider.inter);
-				}).on('mouseout', function() {
-					_slider.setAutoSlide();
-				});*/
-			}		
+			// 	this.slider.on('mouseenter', function() {
+			// 		clearTimeout(_slider.timer);
+			// 	}).on('mouseout', function() {
+			// 		_slider.setAutoSlide();
+			// 	});
+			// }		
 			/*事件执行顺序问题,不能放到if里面,把if判断放到setAutoSlide函数中 */
 			this.setAutoSlide();
 
 			this.slider.on('mouseenter', function() {
-				clearTimeout(_slider.inter);
+				clearTimeout(_slider.timer);
 			}).on('mouseout', function() {
 				_slider.setAutoSlide();
-			});		
+			});	
+
+			// 注意 mouseenter 和 mouseover 区别
+			this.slider.on('mouseover', function() {
+				clearTimeout(_slider.timer);
+			});
 		},
 
 		setAutoSlide: function() {
-			clearTimeout(this.inter);
+			// if(this.options.autoSlide) {
+			// 	clearTimeout(this.timer);
+			// 	var _slider = this;
+			// 	this.timer = setTimeout(function() {
+			// 		_slider.slideToLeft();
+			// 		_slider.setAutoSlide();
+			// 	}, this.options.slideInterval);
+			// }
+			
 			if(this.options.autoSlide) {
+				clearTimeout(this.timer);
 				var _slider = this;
-				this.inter = setTimeout(function() {
+				this.timer = setInterval(function() {
 					_slider.slideToLeft();
-					_slider.setAutoSlide();
 				}, this.options.slideInterval);
 			}
-			
 		},
 
 		slideToLeft: function() {
@@ -100,28 +107,24 @@
 					clone.remove();
 					/*图片滚动动画结束*/
 					$(this).css({left: '+=' + _slider.slideStep});
-					_slider.enable = true; 		
+					_slider.enable = true;
 				});
 			} else {
-
 				if(-parseInt(this.slideList.css('left'))+this.slideStep+this.slider.width()>this.slideList.width()) {
 					var newSlideStep = this.slideList.width() - this.slider.width() + parseInt(this.slideList.css('left'));
 					if(newSlideStep > 0) {
 						this.slideList.animate({left: '-=' + newSlideStep}, this.options.slideDuration, function() {
 							_slider.enable = true;
-							alert('已到头')
-						})
+						});
 					} else {
 						_slider.enable = true;
-						alert('已到头1')
-					}					
+					}			
 				} else {
 					this.slideList.animate({left: '-=' + this.slideStep}, this.options.slideDuration, function() {
-						_slider.enable = true;				
+						_slider.enable = true;	
 					});
-				}
-			}
-			
+				}				
+			}							
 		},
 
 		slideToRight: function() {
@@ -135,22 +138,21 @@
 					clone.remove();
 					_slider.enable = true;
 				});
-
 			} else {
 				if(parseInt(this.slideList.css('left')) + this.slideStep > 0) {					
 					this.slideList.animate({left: 0}, this.options.slideDuration, function() {
 						_slider.enable = true;
-						alert('已到头')
 					})				
 				} else {
-					this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function() {
-						_slider.enable = true;				
+					this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function() {			
+						_slider.enable = true;
 					});
 				}
 			}
-
 		}
 	}
+
+	window.ImageSlider  = ImageSlider;
 
 	$.fn.imageSlider = function(options) {
 		
