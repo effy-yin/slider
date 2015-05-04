@@ -1,0 +1,39 @@
+body,ul,li {
+	margin: 0;
+	padding: 0;
+}
+.slide-wrapper {
+	position: relative;
+	overflow: hidden;
+}
+.slide-wrapper ul {
+	position: absolute;		/* 动画需要绝对定位 */
+	font-size: 0; 			/* 不设置的话列表项之间会有间距！????*/
+}
+.slide-wrapper ul li {
+	list-style: none;	
+	display: inline-block;
+	*display: inline;		/* for IE7/8 */
+	*zoom: 1;
+	background: yellow
+}
+.slide-wrapper .slide-btn {
+	display: block;
+	width: 46px;
+	height: 80px;
+	position: absolute;
+	top: 50%;				/* 垂直居中 */
+	margin-top: -40px;
+	background: red;
+	background: url("images/btn.png");
+	opacity: .4;
+	filter: alpha(opacity=40);/* for IE7/8 */
+	cursor: pointer;
+}
+.slide-wrapper .slide-btn.prev {
+	left: 0;
+}
+.slide-wrapper .slide-btn.next {
+	background-position: -46px 0;
+	right: 0; 				/* left 和 right 不能同时设置，否则不管顺序如何，left 的值会y优先于 right 的值 */
+}
