@@ -25,7 +25,7 @@ body,ul,li {
 	top: 50%;				/* 垂直居中 */
 	margin-top: -40px;
 	background: red;
-	background: url("images/btn.png");
+	background: url("btn.png");
 	opacity: .4;
 	filter: alpha(opacity=40);/* for IE7/8 */
 	cursor: pointer;
