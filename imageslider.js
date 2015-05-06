@@ -1,4 +1,4 @@
-(function (window, $) {
+(function(window, $) {
 
 	'use strict';
 
@@ -23,7 +23,7 @@
 
 	ImageSlider.prototype = {
 
-		init: function () {
+		init: function() {
 			var _slider = this,
 				slideWidth,
 				slideHeight,
@@ -57,7 +57,7 @@
 			this.enable = true; /**/
 			this.timer = null;	/**/
 
-			this.slideBtn.on('click', function () {
+			this.slideBtn.on('click', function() {
 				if (!_slider.enable) return;	/*防止多次点击滚动按钮造成的bug*/
 				if ($(this).hasClass('next')) {
 					_slider.slideToLeft();	/*注意不同地方this的作用域*/
@@ -70,9 +70,9 @@
 			// if (this.options.isAutoSlide) {				
 			// 	_slider.setAutoSlide();
 
-			// 	this.slider.on('mouseenter', function () {
+			// 	this.slider.on('mouseenter', function() {
 			// 		clearTimeout(_slider.timer);
-			// 	}).on('mouseout', function () {
+			// 	}).on('mouseout', function() {
 			// 		_slider.setAutoSlide();
 			// 	});
 			// }		
@@ -80,23 +80,23 @@
 			/*事件执行顺序问题,不能放到if里面,把if判断放到setAutoSlide函数中 */
 			this.setAutoSlide();
 
-			this.slider.on('mouseenter', function () {
+			this.slider.on('mouseenter', function() {
 				clearTimeout(_slider.timer);
-			}).on('mouseout', function () {
+			}).on('mouseout', function() {
 				_slider.setAutoSlide();
 			});	
 
 			// 注意 mouseenter 和 mouseover 区别
-			this.slider.on('mouseover', function () {
+			this.slider.on('mouseover', function() {
 				clearTimeout(_slider.timer);
 			});
 		},
 
-		setAutoSlide: function () {
+		setAutoSlide: function() {
 			// if (this.options.isAutoSlide) {
 			// 	clearTimeout(this.timer);
 			// 	var _slider = this;
-			// 	this.timer = setTimeout(function () {
+			// 	this.timer = setTimeout(function() {
 			// 		_slider.slideToLeft();
 			// 		_slider.setAutoSlide();
 			// 	}, this.options.slideInterval);
@@ -104,13 +104,13 @@
 			var _slider = this;
 			if (this.options.isAutoSlide) {
 				clearTimeout(this.timer);
-				this.timer = setInterval(function () {
+				this.timer = setInterval(function() {
 					_slider.slideToLeft();
 				}, this.options.slideInterval);
 			}
 		},
 
-		slideToLeft: function () {
+		slideToLeft: function() {
 		
 			var _slider = this;
 
@@ -120,7 +120,7 @@
 			if (_slider.options.isLoopSlide) {
 				var clone = _slider.slideList.children().slice(0, _slider.options.slideNum);
 				_slider.slideList.append(clone.clone()); ///
-				_slider.slideList.animate({left: '-=' + _slider.slideStep}, _slider.options.slideDuration, function () {
+				_slider.slideList.animate({left: '-=' + _slider.slideStep}, _slider.options.slideDuration, function() {
 					clone.remove();
 					/*图片滚动动画结束*/
 					$(this).css({left: '+=' + _slider.slideStep});
@@ -130,7 +130,7 @@
 				if (-parseInt(_slider.slideList.css('left'))+_slider.slideStep+_slider.slider.width()>_slider.slideList.width()) {
 					var newSlideStep = _slider.slideList.width() - _slider.slider.width() + parseInt(_slider.slideList.css('left')) - this.options.slideElemMargin;
 					if (newSlideStep > 0) {
-						_slider.slideList.animate({left: '-=' + newSlideStep}, _slider.options.slideDuration, function () {
+						_slider.slideList.animate({left: '-=' + newSlideStep}, _slider.options.slideDuration, function() {
 							_slider.enable = true;
 							console.log('end');
 						});
@@ -139,32 +139,32 @@
 						console.log('end');
 					}			
 				} else {
-					_slider.slideList.animate({left: '-=' + _slider.slideStep}, _slider.options.slideDuration, function () {
+					_slider.slideList.animate({left: '-=' + _slider.slideStep}, _slider.options.slideDuration, function() {
 						_slider.enable = true;	
 					});
 				}				
 			}							
 		},
 
-		slideToRight: function () {
+		slideToRight: function() {
 			this.enable = false;
 			var _slider = this;
 			if (this.options.isLoopSlide) {
 				var clone = this.slideList.children().slice(-this.options.slideNum);
 				this.slideList.prepend(clone.clone());
 				this.slideList.css({left: '-=' + this.slideStep});
-				this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function () {
+				this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function() {
 					clone.remove();
 					_slider.enable = true;
 				});
 			} else {
 				if (parseInt(this.slideList.css('left')) + this.slideStep > 0) {					
-					this.slideList.animate({left: 0}, this.options.slideDuration, function () {
+					this.slideList.animate({left: 0}, this.options.slideDuration, function() {
 						_slider.enable = true;
 						console.log('end');
 					})				
 				} else {
-					this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function () {			
+					this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function() {			
 						_slider.enable = true;
 					});
 				}
@@ -174,7 +174,7 @@
 
 	window.ImageSlider  = ImageSlider;
 
-	$.fn.imageSlider = function (options) {
+	$.fn.imageSlider = function(options) {
 		
 		var instance = new ImageSlider(this, options);
 
