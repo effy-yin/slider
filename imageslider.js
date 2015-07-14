@@ -11,7 +11,7 @@
 			slideElemWidth	: 200,
 			slideElemMargin	: 2,
 			slideNum  		: 4,
-			slideDuration	: 1000,
+			slideDuration	: 2000,
 			slideInterval	: 3000,
 			isAutoSlide 	: true,
 			isLoopSlide   	: true
