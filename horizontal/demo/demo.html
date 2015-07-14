@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>图片轮播</title>
-<link rel="stylesheet" type="text/css" href="../imageslider.css">
+<link rel="stylesheet" type="text/css" href="../slider.css">
 <style type="text/css">
 h1 {
 	font-size: 18px;
@@ -83,29 +83,13 @@ h1 {
 		<span class="slide-btn next"></span>
 	</div>
 
-	<h1>Demo 5</h1>
-	<div class="slide-wrapper" id="slider5">
-		<ul>
-			<li><div><img src="images/01.jpg"></div></li>
-			<li><div><img src="images/02.jpg"></div></li>
-			<li><div><img src="images/03.jpg"></div></li>
-			<li><div><img src="images/04.jpg"></div></li>
-			<li><div><img src="images/05.jpg"></div></li>
-			<li><div><img src="images/06.jpg"></div></li>
-			<li><div><img src="images/07.jpg"></div></li>
-			<li><div><img src="images/08.jpg"></div></li>
-			<li><div><img src="images/09.jpg"></div></li>
-			<li><div><img src="images/010.jpg"></div></li>			
-		</ul>
-		<span class="slide-btn prev"></span>
-		<span class="slide-btn next"></span>
-	</div>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="../imageslider.js"></script>
+<script type="text/javascript" src="../slider.js"></script>
 
 <script type="text/javascript">
 
-var slider = new ImageSlider('#slider1', {slideList 		: 'ul',
+var slider = new Slider('#slider1', {slideList 		: 'ul',
 										  slideBtn  		: '.slide-btn',
 										  slideWidth		: 806,
 										  slideHeight		: 100,
@@ -118,7 +102,7 @@ var slider = new ImageSlider('#slider1', {slideList 		: 'ul',
 										  isLoopSlide   	: true});
 slider.slideToLeft();
 
-$('#slider2').imageSlider({slideList 		: 'ul',
+$('#slider2').Slider({slideList 		: 'ul',
 						   slideBtn  		: '.slide-btn',
 						   slideWidth		: 812,
 						   slideHeight		: 100,
@@ -130,7 +114,7 @@ $('#slider2').imageSlider({slideList 		: 'ul',
 						   isAutoSlide 		: true,
 						   isLoopSlide   	: true});	
 
-$('#slider3').imageSlider({slideList 		: 'ul',   
+$('#slider3').Slider({slideList 		: 'ul',   
 						   slideBtn  		: '.slide-btn',
 						   slideWidth		: 604,
 						   slideHeight		: 100,
@@ -142,7 +126,7 @@ $('#slider3').imageSlider({slideList 		: 'ul',
 						   isAutoSlide 		: true,
 						   isLoopSlide   	: false});
 
-$('#slider4').imageSlider({slideList 		: 'ul',
+$('#slider4').Slider({slideList 		: 'ul',
 						   slideBtn  		: '.slide-btn',
 						   slideWidth		: 260,
 						   slideHeight		: 140,

@@ -2,7 +2,7 @@
 
 	'use strict';
 
-	function ImageSlider(slider, options) {
+	function Slider(slider, options) {
 		var defaults = {
 			slideList 		: 'ul',
 			slideBtn  		: '.slide-btn',
@@ -21,7 +21,7 @@
 		this.init();
 	}
 
-	ImageSlider.prototype = {
+	Slider.prototype = {
 
 		init: function() {
 			var _slider = this,
@@ -178,11 +178,11 @@
 		}
 	}
 
-	window.ImageSlider  = ImageSlider;
+	window.Slider  = Slider;
 
-	$.fn.imageSlider = function(options) {
+	$.fn.Slider = function(options) {
 		
-		var instance = new ImageSlider(this, options);
+		var instance = new Slider(this, options);
 
 		//return instance;
 		return $(this);

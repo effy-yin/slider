@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>slier</title>
+<style>
+* {margin: 0;padding: 0}
+li {list-style: none;}
+ul {
+	margin: 20px;
+	width: 200px;
+	height: 260px;
+	overflow: hidden;
+}
+li {
+	height: 60px;
+	margin-bottom: 6px;
+}
+li.yellow {
+	background-color: #F8BB00;
+}
+li.pink {
+	background-color: #EC80A4;
+}
+li.blue {
+	background-color: #ABC3DF;
+}
+</style>
+<body>
+<div>
+	<ul>
+		<li class="pink">111</li>
+		<li class="yellow">222</li>
+		<li class="blue">333</li>
+		<li class="pink">444</li>
+		<li class="yellow">555</li>
+		<li class="blue">666</li>
+		<li class="pink">777</li>
+		<li class="yellow">888</li>
+		<li class="blue">999</li>
+	</ul>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="slider.js"></script>
+<script type="text/javascript">
+	var slider = new Slider('ul');
+</script>
+</body>
+</html>
+
