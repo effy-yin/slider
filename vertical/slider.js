@@ -15,10 +15,10 @@
 	}
 	Slider.prototype = {
 		init: function() {
-			var _self = this;
-			_self.timer = setInterval(function() {
-				_self.showNext();
-			}, _self.settings.interval);
+			var _this = this;
+			_this.timer = setInterval(function() {
+				_this.showNext();
+			}, _this.settings.interval);
 		},
 		showNext: function() {
 			var $last = this.$wrapper.children().last();
@@ -27,13 +27,13 @@
 				.animate({'height': this.settings.height});
 		},
 		bindHandler: function() {
-			var _self = this;
+			var _this = this;
 			this.$wrapper.hover(function() {
-				clearInterval(_self.timer);
+				clearInterval(_this.timer);
 			}, function() {
-				_self.timer = setInterval(function() {
-					_self.showNext();
-				}, _self.settings.interval);
+				_this.timer = setInterval(function() {
+					_this.showNext();
+				}, _this.settings.interval);
 			});
 		}
 	}

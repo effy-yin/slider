@@ -24,7 +24,7 @@
 	Slider.prototype = {
 
 		init: function() {
-			var _slider = this,
+			var _this = this,
 				slideWidth,
 				slideHeight,
 				slideElemWidth,
@@ -58,22 +58,22 @@
 			this.timer = null;	/**/
 
 			this.slideBtn.on('click', function() {
-				if (!_slider.enable) return;	/*防止多次点击滚动按钮造成的bug*/
+				if (!_this.enable) return;	/*防止多次点击滚动按钮造成的bug*/
 				if ($(this).hasClass('next')) {
-					_slider.slideToLeft();	/*注意不同地方this的作用域*/
+					_this.slideToLeft();	/*注意不同地方this的作用域*/
 				} else {
-					_slider.slideToRight();
+					_this.slideToRight();
 				}
 			});
 
 
 			// if (this.options.isAutoSlide) {				
-			// 	_slider.setAutoSlide();
+			// 	_this.setAutoSlide();
 
 			// 	this.slider.on('mouseenter', function() {
-			// 		clearTimeout(_slider.timer);
+			// 		clearTimeout(_this.timer);
 			// 	}).on('mouseout', function() {
-			// 		_slider.setAutoSlide();
+			// 		_this.setAutoSlide();
 			// 	});
 			// }		
 
@@ -81,74 +81,74 @@
 			this.setAutoSlide();
 
 			this.slider.on('mouseenter', function() {
-				clearTimeout(_slider.timer);
+				clearTimeout(_this.timer);
 			}).on('mouseout', function() {
-				_slider.setAutoSlide();
+				_this.setAutoSlide();
 			});	
 
 			// 注意 mouseenter 和 mouseover 区别
 			this.slider.on('mouseover', function() {
-				clearTimeout(_slider.timer);
+				clearTimeout(_this.timer);
 			});
 		},
 
 		setAutoSlide: function() {
 			// if (this.options.isAutoSlide) {
 			// 	clearTimeout(this.timer);
-			// 	var _slider = this;
+			// 	var _this = this;
 			// 	this.timer = setTimeout(function() {
-			// 		_slider.slideToLeft();
-			// 		_slider.setAutoSlide();
+			// 		_this.slideToLeft();
+			// 		_this.setAutoSlide();
 			// 	}, this.options.slideInterval);
 			// }
-			var _slider = this;
+			var _this = this;
 			if (this.options.isAutoSlide) {
 				clearTimeout(this.timer);
 				this.timer = setInterval(function() {
-					_slider.slideToLeft();
+					_this.slideToLeft();
 				}, this.options.slideInterval);
 			}
 		},
 
 		slideToLeft: function() {
 		
-			var _slider = this;
+			var _this = this;
 
 			/*图片滚动期间点击滚动按钮无效*/
-			_slider.enable = false;
+			_this.enable = false;
 
-			if (_slider.options.isLoopSlide) {
-				var clone = _slider.slideList.children().slice(0, _slider.options.slideNum);
-				_slider.slideList.append(clone.clone()); ///
-				_slider.slideList.animate({left: '-=' + _slider.slideStep}, _slider.options.slideDuration, function() {
+			if (_this.options.isLoopSlide) {
+				var clone = _this.slideList.children().slice(0, _this.options.slideNum);
+				_this.slideList.append(clone.clone()); ///
+				_this.slideList.animate({left: '-=' + _this.slideStep}, _this.options.slideDuration, function() {
 					clone.remove();
 					/*图片滚动动画结束*/
-					$(this).css({left: '+=' + _slider.slideStep});
-					_slider.enable = true;
+					$(this).css({left: '+=' + _this.slideStep});
+					_this.enable = true;
 				});
 			} else {
-				if (-parseInt(_slider.slideList.css('left')) + _slider.slideStep + _slider.slider.width() > _slider.slideList.width()) {
-					var newSlideStep = _slider.slideList.width() - _slider.slider.width() + parseInt(_slider.slideList.css('left')) - this.options.slideElemMargin;
+				if (-parseInt(_this.slideList.css('left')) + _this.slideStep + _this.slider.width() > _this.slideList.width()) {
+					var newSlideStep = _this.slideList.width() - _this.slider.width() + parseInt(_this.slideList.css('left')) - this.options.slideElemMargin;
 					if (newSlideStep > 0) {
-						_slider.slideList.animate({left: '-=' + newSlideStep}, _slider.options.slideDuration, function() {
-							_slider.enable = true;						
+						_this.slideList.animate({left: '-=' + newSlideStep}, _this.options.slideDuration, function() {
+							_this.enable = true;						
 							console.log('end');
 						});
 					} else {
-						_slider.enable = true;
-						_slider.slideList.animate({left: 0}, _slider.options.slideDuration);
+						_this.enable = true;
+						_this.slideList.animate({left: 0}, _this.options.slideDuration);
 						console.log('end');
 					}			
 				} else {
-					_slider.slideList.animate({left: '-=' + _slider.slideStep}, _slider.options.slideDuration, function() {
-						_slider.enable = true;	
+					_this.slideList.animate({left: '-=' + _this.slideStep}, _this.options.slideDuration, function() {
+						_this.enable = true;	
 					});
 				}				
 			}							
 		},
 
 		slideToRight: function() {			
-			var _slider = this;
+			var _this = this;
 			this.enable = false;
 			if (this.options.isLoopSlide) {
 				var clone = this.slideList.children().slice(-this.options.slideNum);
@@ -156,22 +156,22 @@
 				this.slideList.css({left: '-=' + this.slideStep});
 				this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function() {
 					clone.remove();
-					_slider.enable = true;
+					_this.enable = true;
 				});
 			} else {
 				if (parseInt(this.slideList.css('left')) == 0) {
-					this.slideList.animate({left: _slider.options.slideWidth - _slider.slideList.width() + _slider.options.slideElemMargin}, this.options.slideDuration, function() {
-						_slider.enable = true;
+					this.slideList.animate({left: _this.options.slideWidth - _this.slideList.width() + _this.options.slideElemMargin}, this.options.slideDuration, function() {
+						_this.enable = true;
 						console.log('end');
 					});		
 				} else if (parseInt(this.slideList.css('left')) + this.slideStep > 0) {					
 					this.slideList.animate({left: 0}, this.options.slideDuration, function() {
-						_slider.enable = true;
+						_this.enable = true;
 						console.log('end');
 					});		
 				} else {
 					this.slideList.animate({left: '+=' + this.slideStep}, this.options.slideDuration, function() {			
-						_slider.enable = true;
+						_this.enable = true;
 					});
 				}
 			}
